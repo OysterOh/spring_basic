@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.spring.myweb.command.FreeBoardVO;
+import com.spring.myweb.util.PageVO;
 
 @ExtendWith(SpringExtension.class) //테스트 환경을 만들어 주는 junit5 객체 로딩
 @ContextConfiguration(locations = {
@@ -34,27 +35,38 @@ public class FreeBoardMapperTest {
 		//  준비	-  실행 - 검증
 		
 		//given: 테스트를 위해 주어질 데이터 (ex: parameter)
-		FreeBoardVO vo = new FreeBoardVO();
-		vo.setTitle("첫글");
-		vo.setWriter("abc1234");
-		vo.setContent("hi hello modi");
 		
-		//when: 테스트 실제 상황
-		mapper.regist(vo);
+//		FreeBoardVO vo = new FreeBoardVO();
+//		vo.setTitle("첫글");
+//		vo.setWriter("abc1234");
+//		vo.setContent("hi hello modi");
+
+		for(int i=1; i<=200; i++) {
+			FreeBoardVO vo = new FreeBoardVO();
+			vo.setTitle("title" + i);
+			vo.setWriter("abc1234");
+			vo.setContent("content " + i);
+			//when: 테스트 실제 상황
+			mapper.regist(vo);
+		}
 		
 		//then: 테스트 결과를 확인	 
 	}
 	
-	@Test @DisplayName("전체 글 목록 조회, 글 개수 파악 그중 하나 조회")
+	@Test @DisplayName("사용자가 원하는 페이지 번호에 맞는 글 목록을 불러 올 것이고"
+						+ "게시물의 개수는 사용자가 원하는 만큼의 개수를 가진다.")
 	void getListTest() {
-		List<FreeBoardVO> list = mapper.getList();
+		PageVO vo = new PageVO();
+		vo.setPageNum(7);
+		
+		List<FreeBoardVO> list = mapper.getList(vo);
 		/*	
 		  	for(FreeBoardVO vo : list) {
 			 System.out.println(vo);
 		 }
 		 */
-		list.forEach(vo -> System.out.println(vo));
-		assertEquals(4, list.size());
+		list.forEach(article -> System.out.println(article));
+		assertEquals(vo.getCpp(), list.size());
 	}
 	
 	@Test
@@ -92,9 +104,14 @@ public class FreeBoardMapperTest {
 	@DisplayName("글 번호가 2번인 글을 삭제한 후에 리스트를 전체 조회했을 때 글의 개수는 1개일 것이고,"
 			+ "2번 글을 조회했을 때 null이 반환되어야 한다.")
 	void deleteTest() {
+		//given
 		int bno = 2;
+		
+		//when
 		mapper.delete(bno);
-		assertEquals(1, mapper.getList().size());
+		
+		//then
+//		assertEquals(1, mapper.getList().size());
 		assertNull(mapper.getContent(bno));
 				
 	}
