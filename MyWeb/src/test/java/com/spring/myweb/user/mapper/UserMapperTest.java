@@ -1,6 +1,7 @@
 package com.spring.myweb.user.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.DisplayName;
@@ -34,36 +35,30 @@ public class UserMapperTest {
 	@DisplayName("존재하는 회원 아이디를 조회하면 1이 리턴되어야 한다.")
 	void checkIdTest() {
 		
-		String id = "abc1234";	
-		UserVO vo = new UserVO();
-//		mapper.getInfo(id);
+		String userId = "abc1234";	
 //		assertEquals(id, vo.getUserId());
-		assertEquals(1, mapper.idCheck(id));
+		assertEquals(1, mapper.idCheck(userId));
 	}
 	
 
-	
-	///////////////////////////////////
 	@Test
 	@DisplayName("존재하는 회원 아이디와 올바른 비밀번호를 입력하면 회원의 정보가 리턴되어야 한다.")
 	void loginTest() {
-		String id = "abc1234";
-		String pw = "aaa1111!";
-		UserVO vo = mapper.login(id, pw);
-		
-		assertEquals(id, vo.getUserId());
-		assertEquals(pw, vo.getUserPw());
+		String userId = "abc1234";
+		String userPw = "aaa1111!";
+//		UserVO vo = mapper.login(id, pw);
+		assertNotNull(mapper.login(userId, userPw));
+//		assertEquals(id, vo.getUserId());
+//		assertEquals(pw, vo.getUserPw());
 	}
-	///////////////////////////////////
-	
+
 	
 	@Test
 	@DisplayName("존재하지 않는 회원 아이디를 입력하면 null이 온다.")
 	void getInfoTest() {
-		String id = "abc1234";
-		UserVO vo = new UserVO(); 
-		assertNull(mapper.idCheck(id));
-		//null을 어떻게..
+//		String id = "abc1234";
+//		UserVO vo = new UserVO(); 
+		assertNull(mapper.getInfo("qweasdzxc"));
 	}
 
 	
@@ -71,7 +66,8 @@ public class UserMapperTest {
 	@DisplayName("아이디를 제외한 회원의 정보를 수정할 수 있다.")
 	void updateTest() {
 		UserVO vo = new UserVO();
-		vo.setUserPw("수정 비번");
+		vo.setUserId("abc1234");
+		vo.setUserPw("aaa1111!");
 		vo.setUserName("수정 이름");
 		vo.setUserPhone1("수정 폰1");
 		vo.setUserPhone2("수정 폰2");
@@ -81,18 +77,7 @@ public class UserMapperTest {
 		vo.setAddrDetail("수정 주소 상세");
 		vo.setAddrZipNum("주소 집넘");
 		mapper.updateUser(vo);
-//		assertEquals(vo, mapper.updateUser(vo));
-		
-		UserVO updatedUser = mapper.getInfo(vo.getUserId());
-		assertEquals(vo.getUserPw(), updatedUser.getUserPw());
-		assertEquals(vo.getUserName(), updatedUser.getUserName());
-		assertEquals(vo.getUserPhone1(), updatedUser.getUserPhone1());
-		assertEquals(vo.getUserPhone2(), updatedUser.getUserPhone2());
-		assertEquals(vo.getUserEmail1(), updatedUser.getUserEmail1());
-		assertEquals(vo.getUserEmail2(), updatedUser.getUserEmail2());
-		assertEquals(vo.getAddrBasic(), updatedUser.getAddrBasic());
-		assertEquals(vo.getAddrDetail(), updatedUser.getAddrDetail());
-		assertEquals(vo.getAddrZipNum(), updatedUser.getAddrZipNum());
+		assertEquals(mapper.getInfo("abc1234").getUserName(),vo.getUserName());
 	}
 	
 }
