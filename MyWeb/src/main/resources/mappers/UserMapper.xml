@@ -13,7 +13,7 @@
 	</insert>
 	
 	<select id="getInfo" resultType="user">
-		SELECT user_id FROM users
+		SELECT * FROM users
 		WHERE user_id=#{userId}
 	</select>
 	

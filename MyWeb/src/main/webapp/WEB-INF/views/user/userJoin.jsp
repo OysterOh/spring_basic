@@ -195,7 +195,7 @@
 		fetch('${pageContext.request.contextPath}/user/idCheck', reqObj)
 			.then(res => res.text()) //요청 완료 후 응답 정보에서 텍스트만 빼기
 			.then(data => { //텍스트만 뺀 Promise 객체로부터 data 전달받음.
-				if (data === 'ok') {
+				if (data === 'available') {
 					//더 이상 아이디를 작성할 수 없도록 막아주겠다.
 					document.getElementById('userId').setAttribute('readonly', true);
 					//더 이상 버튼을 누를 수 없도록 버튼 비활성화.
