@@ -41,7 +41,7 @@ public class FreeBoardMapperTest {
 //		vo.setWriter("abc1234");
 //		vo.setContent("hi hello modi");
 
-		for(int i=1; i<=200; i++) {
+		for(int i=1; i<=10; i++) {
 			FreeBoardVO vo = new FreeBoardVO();
 			vo.setTitle("title" + i);
 			vo.setWriter("abc1234");

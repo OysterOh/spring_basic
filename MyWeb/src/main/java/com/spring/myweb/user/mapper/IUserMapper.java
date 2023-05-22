@@ -3,6 +3,7 @@ package com.spring.myweb.user.mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.myweb.command.UserVO;
+import com.spring.myweb.util.PageVO;
 
 public interface IUserMapper {
 
@@ -19,10 +20,10 @@ public interface IUserMapper {
 	 2. Map으로 포장
 	 3. 클래스 디자인해서 객체 하나만 매개값으로 보내는 방법(VO)
 	 															중 하나 선택*/
-	UserVO login(@Param("userId") String userId, @Param("userPw")String userPw);
+	String login(String userId);
 	
 	//회원 정보 얻기
-	UserVO getInfo(String userId);
+	UserVO getInfo(@Param("userId") String userId, @Param("paging") PageVO vo);
 	
 	//회원 정보 수정
 	void updateUser(UserVO vo);

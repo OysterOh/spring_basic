@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.myweb.command.UserVO;
 import com.spring.myweb.user.mapper.IUserMapper;
+import com.spring.myweb.util.PageVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,14 +38,13 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserVO login(String userId, String userPw) {
+	public String login(String userId, String userPw) {
 		//id 정보를 기반으로 회원의 정보를 조회
-		UserVO vo = getInfo(userId);
-		if(vo != null) {
-			String dbPw = vo.getUserPw();	//DB에서 가져온 암호화된 비밀번호
+		String dbPw = mapper.login(userId);	//DB에서 가져온 암호화된 비밀번호
+		if(dbPw != null) {
 			//날것의 비밀번호와 암호화된 비밀번호의 일치 여부를 알려주는 matches()
 			if(encoder.matches(userPw, dbPw)) {
-				return vo;
+				return userId;
 			}
 		}
 		return null;
@@ -52,8 +52,8 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserVO getInfo(String userId) {
-		return mapper.getInfo(userId);
+	public UserVO getInfo(String userId, PageVO vo) {
+		return mapper.getInfo(userId, vo);
 	}
 
 	@Override
