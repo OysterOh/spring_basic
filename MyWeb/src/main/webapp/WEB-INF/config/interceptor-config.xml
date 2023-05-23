@@ -23,7 +23,8 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/freeboard/regist"/>
 			<mvc:mapping path="/user/userMypage"/>
-			<mvc:mapping path="/freeboard/content/**"/>
+			<!-- <mvc:mapping path="/freeboard/content/**"/> -->
+			<!-- 글 상세보기 바로 보려고 잠깐 주석 -->
 			<!-- **뭐가 들어올지 모르니까 -->
 			<ref bean="userAuth"/>
 		</mvc:interceptor>

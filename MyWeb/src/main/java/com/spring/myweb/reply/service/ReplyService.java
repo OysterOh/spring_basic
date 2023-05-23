@@ -18,6 +18,7 @@ public class ReplyService implements IReplyService {
 	@Autowired
 	private IReplyMapper mapper;
 	
+	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
 	@Override
@@ -40,25 +41,24 @@ public class ReplyService implements IReplyService {
 
 	@Override
 	public int getTotal(int bno) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.getTotal(bno);
 	}
 
 	@Override
 	public boolean pwCheck(ReplyVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+		String dbPw = mapper.pwCheck(vo.getRno());
+		return encoder.matches(vo.getReplyPw(), dbPw);
 	}
 
 	@Override
 	public void update(ReplyVO vo) {
-		// TODO Auto-generated method stub
+		mapper.update(vo);
 
 	}
 
 	@Override
 	public void delete(int rno) {
-		// TODO Auto-generated method stub
+		mapper.delete(rno);
 
 	}
 
