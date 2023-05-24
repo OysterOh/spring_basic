@@ -24,4 +24,5 @@ public interface IFreeBoardMapper {
 	
 	//삭제
 	void delete(int bno);
+
 }

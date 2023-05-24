@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.spring.myweb.command.FreeBoardVO;
 import com.spring.myweb.command.ReplyVO;
 import com.spring.myweb.reply.mapper.IReplyMapper;
 import com.spring.myweb.util.PageVO;
@@ -61,5 +62,5 @@ public class ReplyService implements IReplyService {
 		mapper.delete(rno);
 
 	}
-
+	
 }

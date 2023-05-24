@@ -3,6 +3,7 @@ package com.spring.myweb.reply.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.spring.myweb.command.FreeBoardVO;
 import com.spring.myweb.command.ReplyVO;
 
 public interface IReplyMapper {
@@ -24,4 +25,5 @@ public interface IReplyMapper {
 	
 	//댓글 삭제
 	void delete(int rno);
+	
 }
