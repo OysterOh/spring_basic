@@ -48,7 +48,6 @@ public class UserService implements IUserService {
 			}
 		}
 		return null;
-//		return mapper.login(userId, userPw);
 	}
 
 	@Override
