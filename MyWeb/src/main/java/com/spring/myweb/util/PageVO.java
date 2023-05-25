@@ -22,7 +22,7 @@ public class PageVO {
 	
 	public PageVO() {
 		this.pageNum = 1;
-		this.cpp = 20;
+		this.cpp = 10;
 	}
 	
 	public int getPageStart() {
